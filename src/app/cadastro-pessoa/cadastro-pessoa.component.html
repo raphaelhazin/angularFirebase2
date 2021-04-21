@@ -1,11 +1,17 @@
 <h1> Cadastro de pessoa</h1>
-    <form #f="ngForm" (submit)="form_submit(f)">
-        <input type="text" ngModel name="nome" placeholder="Nome">
-        <br />
-        <input type="text" ngModel name="sobrenome" placeholder="Sobrenome">
-        <br />
-        <button type="submit">Cadastrar</button>
-    </form>    
+        <input type="text" [(ngModel)]="pessoa.id" name="id" placeholder="Id">
+        <br/>
+        <br/>
+        <input type="text" [(ngModel)]="pessoa.nome" name="nome" placeholder="Nome">
+        <br/>
+        <br/>
+        <input type="text" [(ngModel)]="pessoa.sobrenome" name="sobrenome" placeholder="Sobrenome">
+        <br/>
+        <br/>
+        <button (click)="enviar()">Cadastrar</button>
+        <br/>
+        <br/>
+        <button (click)="monitorar()">Monitorar</button>        
     <ul>
         <li *ngFor="let p of pessoas">
             {{p.nome + ' ' + p.sobrenome}}

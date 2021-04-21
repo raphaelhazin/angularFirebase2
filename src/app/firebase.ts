@@ -24,21 +24,20 @@ export class Firebase {
         this.instancia = firebase.initializeApp(this.firebaseConfig); 
     }
 
-    salvar() {
-        var dado = {
-            nome:"rafa",
-            idade:10
-          };
-        const db = this.instancia.database().ref('chave/' + 1000);
+    salvar(dado) {
+        // var dado = {
+        //     nome:"rafa",
+        //     idade:10
+        //   };
+        var db = this.instancia.database().ref(dado.id +'/');
         db.set(dado);
     
     }
 
-    consultar() {
-        var dado = firebase.database().ref('chave/' + 1000);
-
-        dado.on('value', (snapshot) => {
-            const data = snapshot.val;
+    consultar(dado) {
+        var db = this.instancia.database().ref(dado.id +'/');
+        db.on('value', (snapshot) => {
+            const data = snapshot.val();
             console.log("Peneirinha", data);
         })
 

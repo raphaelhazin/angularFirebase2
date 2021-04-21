@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'; 
-import { AppComponent } from '../app.component';
+import { Pessoa } from './pessoa';
+import {Firebase} from './../firebase';
 
 
 @Component({
@@ -10,17 +11,31 @@ import { AppComponent } from '../app.component';
 })
 export class CadastroPessoaComponent implements OnInit {
 
-  pessoas:Array<any>;
-  constructor() { }
+  pessoa: Pessoa = new Pessoa();
+  pessoas:Array<Pessoa>;
+  db: Firebase;
+  constructor() { 
+    this.db = new Firebase();
+    this.db.conectar();
+    // db.consultar();
+  }
   
 
   ngOnInit(): void {
-    this.pessoas = new Array<any>();
+    this.pessoas = new Array<Pessoa>();
   }
 
   form_submit(f: NgForm) {
-     this.pessoas.push({ nome: f.form.controls.nome.value, sobrenome: f.form.controls.sobrenome.value });
-     console.log(this.pessoas);
-    }
+    //  this.pessoas.push({ nome: f.form.controls.nome.value, sobrenome: f.form.controls.sobrenome.value });
+    //  console.log(this.pessoas);
+  }
+
+  enviar() {
+    this.db.salvar(this.pessoa);
+  }
+
+  monitorar() {
+    this.db.consultar(this.pessoa);
+  }
 
 }
